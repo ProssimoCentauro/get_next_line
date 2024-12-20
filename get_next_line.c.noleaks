@@ -72,7 +72,7 @@ char    *fix_buffer(char *str)
         return (NULL);
     i = 0;
     j = 0;
-    while (str[i] != '\n' && str[i])
+    while (str[i] != '\n')
         i++;
     k = i;
     while (str[i])
@@ -173,12 +173,8 @@ char    *create_buffer(int fd, char *buffer)
         if (readed_bytes == 0)
         {
             free(buffer);
-            if (!tmp)
-            {
-                free(tmp);
-                return (NULL);
-            }
-            return (tmp);
+            free(tmp);
+            return (NULL);
         }
         buffer[ft_strlen(tmp) + (BUFFER_SIZE * count)] = '\0';
         free(tmp);
@@ -218,7 +214,7 @@ char    *get_next_line(int fd)
     }*/
     return (line);
 }
-/*
+
 #include <fcntl.h>
 
 int main()
@@ -242,4 +238,4 @@ int main()
     }
     return (0);
 }
-*/
+

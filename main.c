@@ -1,4 +1,6 @@
 #include "get_next_line.h"
+#include "get_next_line.c"
+#include "get_next_line_utils.c"
 #include <stdio.h>
 #include <fcntl.h>
 
@@ -8,7 +10,7 @@ int main()
     int fd;
     int c;
 
-    fd = open("/nfs/homes/rtodaro/Desktop/common-core-tests/get_next_line/test.txt", O_RDONLY, NULL);
+    fd = open("/home/prossimocentauro/my-common-core/get_next_line/41_no_nl", O_RDONLY, NULL);
     if (fd < 0)
         printf("can not open file!\n");
     int i = 0;

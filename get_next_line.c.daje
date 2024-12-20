@@ -68,11 +68,9 @@ char    *fix_buffer(char *str)
     size_t  k;
     char    *new;
 
-    if (!str)
-        return (NULL);
     i = 0;
     j = 0;
-    while (str[i] != '\n' && str[i])
+    while (str[i] != '\n')
         i++;
     k = i;
     while (str[i])
@@ -85,12 +83,6 @@ char    *fix_buffer(char *str)
         new[j++] = str[k++];
     new[j] = '\0';
     free(str);
-    if (!new[0])
-    {
-        free(new);
-        str = NULL;
-        return (str);
-    }
     return (new);
 }
 
@@ -158,10 +150,10 @@ char    *create_buffer(int fd, char *buffer)
             tmp = ft_strdup(buffer);
             if (!tmp)
                 return (NULL);
-            free(buffer);
         }
         else
             tmp = NULL;
+        free(buffer);
         buffer = (char *)malloc(ft_strlen(tmp) + (BUFFER_SIZE * count) + 1);
         //ft_zero(buffer);
         if (!buffer)
@@ -173,12 +165,8 @@ char    *create_buffer(int fd, char *buffer)
         if (readed_bytes == 0)
         {
             free(buffer);
-            if (!tmp)
-            {
-                free(tmp);
-                return (NULL);
-            }
-            return (tmp);
+            free(tmp);
+            return (NULL);
         }
         buffer[ft_strlen(tmp) + (BUFFER_SIZE * count)] = '\0';
         free(tmp);
@@ -203,8 +191,6 @@ char    *get_next_line(int fd)
     {
         line = extract_line(buffer);
         buffer = fix_buffer(buffer);
-        if (!buffer)
-            buffer = create_buffer(fd, buffer);
         return (line);
     }
     buffer = create_buffer(fd, buffer);
@@ -212,13 +198,9 @@ char    *get_next_line(int fd)
         return (NULL);
     line = extract_line(buffer);
     buffer = fix_buffer(buffer);
-    /*if (!buffer[0])
-    {
-        free(buffer);
-    }*/
     return (line);
 }
-/*
+
 #include <fcntl.h>
 
 int main()
@@ -227,11 +209,11 @@ int main()
     int fd;
     int c;
 
-    fd = open("/home/prossimocentauro/my-common-core/get_next_line/41_no_nl", O_RDONLY, NULL);
+    fd = open("/home/prossimocentauro/my-common-core/get_next_line/test", O_RDONLY, NULL);
     if (fd < 0)
         printf("can not open file!\n");
     int i = 0;
-    while (i<10)
+    while (i<15)
     {
         line = get_next_line(fd);
         i++;
@@ -242,4 +224,4 @@ int main()
     }
     return (0);
 }
-*/
+
