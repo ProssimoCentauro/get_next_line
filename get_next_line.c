@@ -1,39 +1,6 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
-int check_newline_lst(t_list *lst)
-{
-    size_t  i;
-
-    if (!lst)
-        return (0);
-    while (lst)
-    {
-        i = 0;
-        while (lst->str[i] && i < BUFFER_SIZE)
-        {
-            if (lst->str[i] == '\n')
-                return (1);
-            i++;
-        }
-        lst= lst->next;
-    }
-    return (0);
-}
-
-int check_newline(char  *str)
-{
-    if (!str)
-        return (0);
-    while (*str)
-    {
-        if (*str == '\n')
-            return (1);
-        str++;
-    }
-    return (0);
-}
-
 char    *extract_line(char  *str)
 {
     int  i;
@@ -68,7 +35,7 @@ char    *fix_buffer(char *str)
     size_t  k;
     char    *new;
 
-    if (!str)
+    if (!str || !str[0])
         return (NULL);
     i = 0;
     j = 0;
@@ -77,10 +44,11 @@ char    *fix_buffer(char *str)
     k = i;
     while (str[i])
         i++;
-    new = (char *)malloc(i - k);
+    new = (char *)ft_calloc(i - k + 1, 1);
     if (!new)
         return (NULL);
-    k++;
+    if (ft_strlen(str) != 0)
+        k++;
     while (str[k])
         new[j++] = str[k++];
     new[j] = '\0';
@@ -92,56 +60,6 @@ char    *fix_buffer(char *str)
         return (str);
     }
     return (new);
-}
-
-char	*ft_strdup(char *s)
-{
-	char	*dest;
-	size_t	i;
-
-    /*if (!s)
-        return (NULL);*/
-    i = 0;
-    while (s[i])
-    {
-        i++;
-    }
-    dest = (char *)malloc(i + 1);
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		dest[i] = s[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-size_t  ft_strlen(char *str)
-{
-    size_t  i;
-
-    if (str == NULL)
-        return (0);
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
-}
-
-size_t    ft_strncpy(char *dest, char *src, size_t n)
-{
-    size_t  i;
-
-    i = 0;
-    while (i < n)
-    {
-        dest[i] = src[i];
-        i++;
-    }
-    return (i);
 }
 
 char    *create_buffer(int fd, char *buffer)
@@ -162,7 +80,7 @@ char    *create_buffer(int fd, char *buffer)
         }
         else
             tmp = NULL;
-        buffer = (char *)malloc(ft_strlen(tmp) + (BUFFER_SIZE * count) + 1);
+        buffer = (char *)ft_calloc(ft_strlen(tmp) + (BUFFER_SIZE * count) + 1, 1);
         //ft_zero(buffer);
         if (!buffer)
         {
@@ -192,10 +110,8 @@ char    *get_next_line(int fd)
 {
     static char    *buffer;
     char    *line;
-    t_list  *lst;
-    int lst_elems;
 
-    if (!fd || BUFFER_SIZE <= 0 || read(fd, buffer, 0) < 0)
+    if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buffer, 0) < 0)
         return (NULL);
     /*if (!buffer)
         buffer = ft_strdup("hola\nwei\njay\n");*/

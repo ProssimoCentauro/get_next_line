@@ -10,7 +10,7 @@ int main()
     int fd;
     int c;
 
-    fd = open("/home/prossimocentauro/my-common-core/get_next_line/41_no_nl", O_RDONLY, NULL);
+    fd = open("/home/prossimocentauro/my-common-core/get_next_line_test/test", O_RDONLY, NULL);
     if (fd < 0)
         printf("can not open file!\n");
     int i = 0;
