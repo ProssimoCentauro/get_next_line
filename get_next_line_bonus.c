@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rtodaro <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 13:55:29 by rtodaro           #+#    #+#             */
-/*   Updated: 2024/12/23 15:07:04 by rtodaro          ###   ########.fr       */
+/*   Created: 2024/12/23 15:32:38 by rtodaro           #+#    #+#             */
+/*   Updated: 2024/12/23 15:32:40 by rtodaro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	*null_free(void **ptr, void **ptr2, int flag1, int flag2)
 {
