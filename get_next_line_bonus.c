@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rtodaro <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 13:47:17 by rtodaro           #+#    #+#             */
-/*   Updated: 2024/12/23 13:47:26 by rtodaro          ###   ########.fr       */
+/*   Created: 2024/12/23 13:55:29 by rtodaro           #+#    #+#             */
+/*   Updated: 2024/12/23 13:55:30 by rtodaro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,22 +124,22 @@ char	*create_buffer(int fd, char *buffer)
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
-	char		*line;
+	char		*line[FT_FD_MAX];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (check_newline(buffer))
+	if (check_newline(buffer[fd]))
 	{
-		line = extract_line(buffer);
-		buffer = fix_buffer(buffer);
-		if (!buffer)
-			buffer = create_buffer(fd, buffer);
+		line = extract_line(buffer[fd]);
+		buffer[fd] = fix_buffer(buffer[fd]);
+		if (!buffer[fd])
+			buffer[fd] = create_buffer(fd, buffer[fd]);
 		return (line);
 	}
-	buffer = create_buffer(fd, buffer);
-	if (!buffer)
+	buffer[fd] = create_buffer(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	line = extract_line(buffer);
-	buffer = fix_buffer(buffer);
+	line = extract_line(buffer[fd]);
+	buffer[fd] = fix_buffer(buffer[fd]);
 	return (line);
 }

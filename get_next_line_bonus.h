@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rtodaro <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 13:47:34 by rtodaro           #+#    #+#             */
-/*   Updated: 2024/12/23 13:47:52 by rtodaro          ###   ########.fr       */
+/*   Created: 2024/12/23 13:54:20 by rtodaro           #+#    #+#             */
+/*   Updated: 2024/12/23 13:54:22 by rtodaro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
+# endif
+
+# ifndef FT_FD_MAX
+#  define FT_FD_MAX 1024
 # endif
 
 # include <stdint.h>
