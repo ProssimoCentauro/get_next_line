@@ -6,7 +6,7 @@
 /*   By: rtodaro <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 13:55:29 by rtodaro           #+#    #+#             */
-/*   Updated: 2024/12/23 13:55:30 by rtodaro          ###   ########.fr       */
+/*   Updated: 2024/12/23 15:07:04 by rtodaro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*extract_line(char *str)
 	char	*line;
 
 	i = 0;
+	line = NULL;
 	while (str[i] && str[i] != '\n')
 		i++;
 	if (str[i] == '\n')
@@ -123,8 +124,8 @@ char	*create_buffer(int fd, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
-	char		*line[FT_FD_MAX];
+	static char	*buffer[FT_FD_MAX];
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);

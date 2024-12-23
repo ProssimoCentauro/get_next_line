@@ -6,7 +6,7 @@
 /*   By: rtodaro <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 13:47:17 by rtodaro           #+#    #+#             */
-/*   Updated: 2024/12/23 13:47:26 by rtodaro          ###   ########.fr       */
+/*   Updated: 2024/12/23 15:04:47 by rtodaro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*extract_line(char *str)
 	char	*line;
 
 	i = 0;
+	line = NULL;
 	while (str[i] && str[i] != '\n')
 		i++;
 	if (str[i] == '\n')
