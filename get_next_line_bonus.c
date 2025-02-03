@@ -112,7 +112,7 @@ char	*create_buffer(int fd, char *buffer)
 			return (null_free((void *)&tmp, NULL, 1, 0));
 		readed_bytes = read(fd, &buffer[ft_strncpy(buffer, tmp,
 					ft_strlen(tmp))], BUFFER_SIZE);
-		if (readed_bytes == 0)
+		if (readed_bytes <= 0)
 		{
 			free(buffer);
 			return (tmp);
